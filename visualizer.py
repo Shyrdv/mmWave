@@ -8,21 +8,21 @@ from geneticalgorithm import geneticalgorithm as ga
 import math
 import json
 
-#If you change a dataset in visualizer.py, remember to change to the same datasets in main.py!
+# If you change a dataset in visualizer.py, remember to change to the same datasets in main.py!
 
-#Load dataset containing the manual data
-data = pd.read_csv('C:/Jupyter/Datasets/bib00-sensor.csv') #REQUIRED
+# Load dataset containing the manual data
+data = pd.read_csv('Datasets/bib00-sensor.csv')  # REQUIRED
 
-#Load dataset containing the sensor data
-man_data = pd.read_csv('C:/Jupyter/Datasets/bib00-manual.csv') # REQUIRED
+# Load dataset containing the sensor data
+man_data = pd.read_csv('Datasets/bib00-manual.csv')  # REQUIRED
 
-#Load dataset containing predefined timestamps ie. 10:00:00, 10:01:00 etc etc
-timestamps = pd.read_csv('C:/Jupyter/Datasets/timestamps.csv') # REQUIRED
+# Load dataset containing predefined timestamps ie. 10:00:00, 10:01:00 etc etc
+timestamps = pd.read_csv('Datasets/timestamps.csv')  # REQUIRED
 
-#All the code - Hazard warning
-if(True):
-    if(True):
-        data = data.drop(['source','part','section_id','door_id','device_id'], axis=1)
+# All the code - Hazard warning
+if (True):
+    if (True):
+        data = data.drop(['source', 'part', 'section_id', 'door_id', 'device_id'], axis=1)
         man_df = pd.DataFrame()
         converted_timestamps = []
         converted_man_data_stamps = []
@@ -48,6 +48,7 @@ if(True):
         converted_auto_data = datetime.strptime(to_convert_auto_data, "%Y-%m-%d %H:%M:%S") + timedelta(hours=2)
         converted_auto_stamps.append(converted_auto_data)
         convert_auto_idx += 1
+
 
     def visualize(params):
         # Function variables
@@ -134,7 +135,7 @@ if(True):
         plt.plot("timestamp", "auto_accumulated_in", data=auto_man_df, color="CORAL", label="Sensor In Events")
         plt.xlabel("Time")
         plt.ylabel("Events")
-        plt.figtext(0.4, 0.01, formatted_overall_acc)
+        plt.figtext(0.4, 0.01, "Bussy")
         plt.savefig('In-Event-Accuracy.png')
         plt.legend()
         plt.show()
@@ -143,7 +144,7 @@ if(True):
         plt.plot("timestamp", "auto_accumulated_out", data=auto_man_df, color="CORAL", label="Sensor Out Events")
         plt.xlabel("Time")
         plt.ylabel("Events")
-        plt.figtext(0.4, 0.01, accuracy.formatted_overall_acc)
+        plt.figtext(0.4, 0.01, "bussy")
         plt.savefig('Out-Event-Accuracy.png')
         plt.legend()
         plt.show()
@@ -173,6 +174,7 @@ if(True):
             return degrees > angle_from and degrees < angle_to
         else:
             return degrees > angle_from or degrees < angle_to
+
 
     def accuracy():
         man_zero_events = 0
@@ -252,8 +254,8 @@ if(True):
             elif (one_procent > 100):
                 one_procent = (man_total_one_events / t_one_events) * 100
 
-        overall_acc = round((one_procent + minus_one_procent) / 2,2)
-        formatted_overall_acc = "Overall Accuracy= "+str(overall_acc)+ "%"
+        overall_acc = round((one_procent + minus_one_procent) / 2, 2)
+        formatted_overall_acc = "Overall Accuracy= " + str(overall_acc) + "%"
 
         print("Sensor: 1 Events={0} | -1 Events={1}".format(t_one_events, t_minus_one_events))
         print("Manual: 1 Events={0} | -1 Events={1}".format(man_total_one_events, man_total_minus_one_events))
@@ -261,7 +263,8 @@ if(True):
         print("Accuracy for -1 Events = {0}%".format(minus_one_procent))
         print("Overall Accuracy = {0}%".format(overall_acc))
 
-    if(True):
+
+    if (True):
         man_total_in = 0
         man_total_out = 0
         time_idx = 0
@@ -276,27 +279,24 @@ if(True):
                 accumulated_in[time_idx] = accumulated_in[time_idx - 1]
 
             try:
-                if(man_data.totalevents[idx-1] > x):
-                    man_total_out +=1
+                if (man_data.totalevents[idx - 1] > x):
+                    man_total_out += 1
                     accumulated_out[time_idx] = man_total_out
                 else:
-                    man_total_in +=1
+                    man_total_in += 1
                     accumulated_in[time_idx] = man_total_in
             except:
-                if(100 > x):
-                    man_total_out +=1
+                if (100 > x):
+                    man_total_out += 1
                     accumulated_out[time_idx] = man_total_out
                 else:
-                    man_total_in +=1
+                    man_total_in += 1
                     accumulated_in[time_idx] = man_total_in
-            idx +=1
+            idx += 1
 
-
-
-        if not( "timestamp" in man_df):
+        if not ("timestamp" in man_df):
             man_df.insert(0, "timestamp", converted_timestamps)
             man_df.insert(1, "accumulated_in", accumulated_in)
             man_df.insert(2, "accumulated_out", accumulated_out)
         else:
             print("Columns are already inserted!")
-

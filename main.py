@@ -20,13 +20,13 @@ vizualiserparameters = np.array([[0], [0], [270], [233], [138]])
 # If you change a dataset in main.py, remember to change to the same datasets in visualizer.py!
 
 # Load dataset containing the manual data
-data = pd.read_csv('C:/Jupyter/Datasets/bib00-sensor.csv')  # REQUIRED
+data = pd.read_csv('Datasets/bib00-sensor.csv')  # REQUIRED
 
 # Load dataset containing the sensor data
-man_data = pd.read_csv('C:/Jupyter/Datasets/bib00-manual.csv')  # REQUIRED
+man_data = pd.read_csv('Datasets/bib00-manual.csv')  # REQUIRED
 
 # Load dataset containing predefined timestamps ie. 10:00:00, 10:01:00 etc etc
-timestamps = pd.read_csv('C:/Jupyter/Datasets/timestamps.csv')  # REQUIRED
+timestamps = pd.read_csv('Datasets/timestamps.csv')  # REQUIRED
 
 
 # Boundaries for the genetic algorithm
